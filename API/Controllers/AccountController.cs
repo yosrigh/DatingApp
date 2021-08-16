@@ -48,15 +48,13 @@ namespace API.Controllers
             {
                 UserName = user.UserName,
                 Token = _tokenService.CreateToken(user),
-                KnownAs = user.KnownAs
+                KnownAs = user.KnownAs,
+                Gender = user.Gender
             };
         }
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDto)
         {
-            _context.Users.Remove(_context.Users.FirstOrDefault(u => u.UserName == "yosri"));
-            _context.SaveChangesAsync();
-
             var user = await _context.Users.Include(p => p.Photos)
                     .SingleOrDefaultAsync(u => u.UserName == loginDto.UserName);
 
@@ -77,7 +75,8 @@ namespace API.Controllers
                 UserName = user.UserName,
                 Token = _tokenService.CreateToken(user),
                 PhotoUrl = user.Photos.FirstOrDefault(ph => ph.IsMain)?.Url,
-                KnownAs = user.KnownAs
+                KnownAs = user.KnownAs,
+                Gender = user.Gender
             };
         }
 
