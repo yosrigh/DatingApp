@@ -7,10 +7,10 @@ export interface Member {
         age: number;
         knownAs: string;
         created: Date;
-        lastActive: Date;
+        lstActive: Date;
         gender: string;
         introduction: string;
-        lookingfor?: any;
+        lookingfor: any;
         interests: string;
         city: string;
         country: string;
